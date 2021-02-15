@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lightroom in Website</title>
+
+    <style>
+        body {font-family: 'Montserrat', sans-serif; font-weight: bolder;}
+        img {width: 300; height: 300};
+    </style>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="img" style="text-align: center;">
+        <h1 style="text-align: center">Enter Image URL from your computer or from the web</h1>
+        <h2><input type="url" placeholder="Enter URL of Image"></h2>
+        <button onclick="enterUrl()"><h2 style="padding-left: 20px; padding-right: 20px;">Enter</h2></button>
+    </div>
+
+    <div class="outcome" style="display: none;">
+        <span>
+            <img style="" src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg"> 
+            <br>
+            Opacity: <input type="range" id="opacity"><br>
+            Brightness: <input type="range" id="brightness"><br>
+            Contrast: <input type="range" id="contrast"><br>
+            Grayscale: <input type="range" id="grayscale"><br>
+            Blur: <input type="range" id="blur"><br>
+        </span>
+    </div>
+
+    <script>
+        function enterUrl()
+        {
+            document.querySelector(".outcome").style.display="block";
+            document.querySelector(".img").style.display="none";
+            document.querySelector("img").setAttribute("src", document.querySelector("input").value);
+        }
+        for(let i = 0; i <= document.querySelectorAll("input").length; i++)
+        {
+            document.querySelectorAll("input")[i].addEventListener("click", function() 
+            {
+                switch (this.id) 
+                {
+                    case "opacity":
+                        let val = document.querySelector("input#opacity").value;
+                        document.querySelector("img").style.opacity = val / 100;
+                        break;
+                
+                    case "brightness":
+                        document.querySelector("img").style.filter = "brightness(" + (document.querySelector("input#brightness").value * 2) + "%)";
+                        break;
+
+                    case "contrast":
+                        document.querySelector("img").style.filter = "contrast(" + (document.querySelector("input#contrast").value * 2) + "%)";
+                        break;
+
+                    case "grayscale":
+                        document.querySelector("img").style.filter = "grayscale(" + document.querySelector("input#grayscale").value + "%)";
+                        break;
+
+                    case "blur":
+                        document.querySelector("img").style.filter = "blur(" + (document.querySelector("input#blur").value / 4) + "px)";
+                        break;
+                    default:                
+                        break;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
